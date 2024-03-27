@@ -1,0 +1,17 @@
+@import "./configs";
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-VariableFont_wdth\,wght.ttf");
+}
+
+* {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+body {
+  overscroll-behavior-y: contain;
+}
