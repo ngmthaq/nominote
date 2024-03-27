@@ -1,12 +1,14 @@
-import React from "react";
 import App from "./App";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
 import NotistackProvider from "./components/Providers/NotistackProvider";
 
 const Provider = () => {
   return (
-    <NotistackProvider>
-      <App />
-    </NotistackProvider>
+    <ThemeProvider>
+      <NotistackProvider>
+        <App />
+      </NotistackProvider>
+    </ThemeProvider>
   );
 };
 

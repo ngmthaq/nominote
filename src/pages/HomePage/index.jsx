@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { eventBus } from "@/services/eventBus";
 import { EVENT_BUS } from "@/configs/app";
 import classes from "./style.module.scss";

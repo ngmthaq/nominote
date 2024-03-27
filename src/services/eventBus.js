@@ -1,5 +1,7 @@
 class EventBus {
-  _events = {};
+  constructor() {
+    this._events = {};
+  }
 
   on(name, callback) {
     if (this._events[name]) {
