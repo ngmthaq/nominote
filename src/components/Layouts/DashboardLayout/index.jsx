@@ -1,5 +1,6 @@
-import { Fragment, memo, useMemo, useState } from "react";
+import { Fragment, memo, useEffect, useMemo, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import RequestNotification from "@/components/Common/RequestNotification";
 import classes from "./style.module.scss";
 
@@ -7,6 +8,7 @@ const DashboardLayout = () => {
   const isMinimizeLocalKey = "isMinimizeLocalKey";
   const isMinimizeLocal = localStorage.getItem(isMinimizeLocalKey);
 
+  const isMobile = useMediaQuery({ query: `(max-width: 992px)` });
   const location = useLocation();
 
   const menuItems = useMemo(
@@ -21,7 +23,7 @@ const DashboardLayout = () => {
     [],
   );
 
-  const [isMinimize, setIsMinimize] = useState(Boolean(isMinimizeLocal));
+  const [isMinimize, setIsMinimize] = useState(Boolean(isMobile || isMinimizeLocal));
 
   const handleToggleMinimize = () => {
     setIsMinimize(!isMinimize);
@@ -32,6 +34,10 @@ const DashboardLayout = () => {
   const handleLogout = () => {
     window.location.href = "/";
   };
+
+  useEffect(() => {
+    setIsMinimize(Boolean(isMobile || isMinimizeLocal));
+  }, [isMobile, isMinimizeLocal]);
 
   return (
     <Fragment>
@@ -60,9 +66,13 @@ const DashboardLayout = () => {
             </a>
           </div>
           <div className={classes.menu}>
-            <button className="btn btn-light" onClick={handleToggleMinimize}>
-              {isMinimize ? <i className="bi bi-caret-right-fill"></i> : <i className="bi bi-caret-left-fill"></i>}
-            </button>
+            {isMobile ? (
+              <i className="bi bi-emoji-smile"></i>
+            ) : (
+              <button className="btn btn-light" onClick={handleToggleMinimize}>
+                {isMinimize ? <i className="bi bi-caret-right-fill"></i> : <i className="bi bi-caret-left-fill"></i>}
+              </button>
+            )}
           </div>
         </div>
         <div className={classes.outlet}>

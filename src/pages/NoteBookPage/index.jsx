@@ -1,9 +1,10 @@
 import { memo, useState } from "react";
+import { MAX_NOTE_NUMBER } from "@/configs/app.js";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
 
 const NoteBookPage = () => {
-  const maxNoteNumber = 100;
+  const maxNoteNumber = MAX_NOTE_NUMBER;
 
   const [notes] = useState(MOCKS);
   const [openedNotes, setOpenedNotes] = useState([]);
