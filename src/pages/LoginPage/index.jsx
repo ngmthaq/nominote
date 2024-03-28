@@ -2,7 +2,7 @@ import { memo, useId, useState } from "react";
 import classes from "./style.module.scss";
 import { isEmail } from "@/helpers/str";
 
-const HomePage = () => {
+const LoginPage = () => {
   const emailInputId = useId();
   const passwordInputId = useId();
   const showPasswordInputId = useId();
@@ -34,7 +34,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className={classes.homePage}>
+    <div className={classes.loginPage}>
       <div className={classes.wrapper}>
         <img src="/icon-512x512.png" alt="logo" />
         <form className="mb-4" onSubmit={handleSubmit}>
@@ -86,4 +86,4 @@ const HomePage = () => {
   );
 };
 
-export default memo(HomePage);
+export default memo(LoginPage);

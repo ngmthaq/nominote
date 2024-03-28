@@ -2,8 +2,12 @@ import { Fragment } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import BaseLayout from "./components/Layouts/BaseLayout";
 import DashboardLayout from "./components/Layouts/DashboardLayout";
-import HomePage from "./pages/HomePage";
-import TodoListPage from "./pages/TodoListPage";
+import HomePage from "./pages/LoginPage";
+import CalendarPage from "./pages/CalendarPage";
+import NoteBookPage from "./pages/NoteBookPage";
+import TaskBoardPage from "./pages/TaskBoardPage";
+import TaskKanbanPage from "./pages/TaskKanbanPage";
+import StringHelperPage from "./pages/StringHelperPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -13,11 +17,11 @@ const App = () => {
           <Route index element={<HomePage />} />
         </Route>
         <Route path="dashboard" element={<DashboardLayout />}>
-          <Route path="calendar" element={<TodoListPage />} />
-          <Route path="tasks/board" element={<TodoListPage />} />
-          <Route path="tasks/kanban" element={<TodoListPage />} />
-          <Route path="notebook" element={<TodoListPage />} />
-          <Route path="str/helpers" element={<TodoListPage />} />
+          <Route path="calendar" element={<CalendarPage />} />
+          <Route path="tasks/board" element={<TaskBoardPage />} />
+          <Route path="tasks/kanban" element={<TaskKanbanPage />} />
+          <Route path="notebook" element={<NoteBookPage />} />
+          <Route path="str/helpers" element={<StringHelperPage />} />
         </Route>
       </Fragment>,
     ),
