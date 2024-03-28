@@ -24,7 +24,7 @@ const GoogleSearchPage = () => {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary mb-5" type="submit">
             Search
           </button>
         </form>
