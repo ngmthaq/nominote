@@ -8,6 +8,7 @@ import NoteBookPage from "./pages/NoteBookPage";
 import TaskBoardPage from "./pages/TaskBoardPage";
 import TaskKanbanPage from "./pages/TaskKanbanPage";
 import StringHelperPage from "./pages/StringHelperPage";
+import GoogleSearchPage from "./pages/GoogleSearchPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -17,6 +18,7 @@ const App = () => {
           <Route index element={<HomePage />} />
         </Route>
         <Route path="dashboard" element={<DashboardLayout />}>
+          <Route path="search" element={<GoogleSearchPage />} />
           <Route path="calendar" element={<CalendarPage />} />
           <Route path="tasks/board" element={<TaskBoardPage />} />
           <Route path="tasks/kanban" element={<TaskKanbanPage />} />

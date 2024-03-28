@@ -11,6 +11,7 @@ const DashboardLayout = () => {
 
   const menuItems = useMemo(
     () => [
+      { title: "Search", link: "/dashboard/search", icon: <i className="bi bi-google"></i> },
       { title: "Calendar", link: "/dashboard/calendar", icon: <i className="bi bi-calendar-week-fill" /> },
       { title: "Task Board", link: "/dashboard/tasks/board", icon: <i className="bi bi-table" /> },
       { title: "Task Kanban", link: "/dashboard/tasks/kanban", icon: <i className="bi bi-kanban" /> },
