@@ -1,0 +1,126 @@
+@import "../../../assets/scss/configs";
+
+.dashboardLayout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 100vh;
+  background-color: $gray-100;
+
+  & .sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    height: inherit;
+    border-right: 1px dashed rgba(145, 158, 171, 0.2);
+    transition: all 0.1s ease-in-out;
+
+    & .logo {
+      margin: 0 12px;
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 90px;
+      border-bottom: 1px dashed rgba(145, 158, 171, 0.4);
+
+      & img {
+        height: 40px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      & h3 {
+        font-weight: bold;
+        color: $dark;
+        margin-bottom: 0px;
+      }
+    }
+
+    & .nav {
+      height: calc(100vh - 90px - 48px);
+      overflow-y: scroll;
+      border-bottom: 1px dashed rgba(145, 158, 171, 0.4);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        font-size: 13px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $dark;
+        font-weight: 600;
+        margin: 8px 12px;
+        padding: 12px;
+        border-radius: 4px;
+        transition: all 0.1s ease-in-out;
+
+        &:hover {
+          background-color: rgba(145, 158, 171, 0.1);
+        }
+
+        &.active {
+          background-color: rgba($color: $primary, $alpha: 0.1);
+          color: $primary;
+          font-weight: 700;
+        }
+      }
+    }
+
+    & .menu {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 8px;
+    }
+
+    &.minimize {
+      width: 80px;
+
+      & .logo h3 {
+        display: none;
+      }
+
+      & .nav a {
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        font-size: 16px;
+
+        & span {
+          display: none;
+        }
+      }
+    }
+  }
+
+  & .outlet {
+    width: 100%;
+    height: inherit;
+    transition: all 0.1s ease-in-out;
+
+    & .outletInside {
+      overflow-y: scroll;
+      height: calc(100% - 40px);
+    }
+
+    & .copyright {
+      width: 100%;
+      height: 40px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+  }
+}
