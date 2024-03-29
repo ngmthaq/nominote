@@ -6,7 +6,7 @@ import HomePage from "./pages/LoginPage";
 import CalendarPage from "./pages/CalendarPage";
 import NoteBookPage from "./pages/NoteBookPage";
 import TaskBoardPage from "./pages/TaskBoardPage";
-import TaskKanbanPage from "./pages/TaskKanbanPage";
+import RegexPage from "./pages/RegexPage";
 import StringHelperPage from "./pages/StringHelperPage";
 import GoogleSearchPage from "./pages/GoogleSearchPage";
 
@@ -20,10 +20,10 @@ const App = () => {
         <Route path="dashboard" element={<DashboardLayout />}>
           <Route path="search" element={<GoogleSearchPage />} />
           <Route path="calendar" element={<CalendarPage />} />
-          <Route path="tasks/board" element={<TaskBoardPage />} />
-          <Route path="tasks/kanban" element={<TaskKanbanPage />} />
+          <Route path="tasks" element={<TaskBoardPage />} />
           <Route path="notebook" element={<NoteBookPage />} />
-          <Route path="str/helpers" element={<StringHelperPage />} />
+          <Route path="str" element={<StringHelperPage />} />
+          <Route path="regex" element={<RegexPage />} />
         </Route>
       </Fragment>,
     ),

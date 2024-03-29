@@ -15,10 +15,10 @@ const DashboardLayout = () => {
     () => [
       { title: "Search", link: "/dashboard/search", icon: <i className="bi bi-google"></i> },
       { title: "Calendar", link: "/dashboard/calendar", icon: <i className="bi bi-calendar-week-fill" /> },
-      { title: "Task Board", link: "/dashboard/tasks/board", icon: <i className="bi bi-table" /> },
-      { title: "Task Kanban", link: "/dashboard/tasks/kanban", icon: <i className="bi bi-kanban" /> },
+      { title: "Task Board", link: "/dashboard/tasks", icon: <i className="bi bi-table" /> },
       { title: "Note Book", link: "/dashboard/notebook", icon: <i className="bi bi-card-text" /> },
-      { title: "String Helper", link: "/dashboard/str/helpers", icon: <i className="bi bi-alphabet-uppercase" /> },
+      { title: "String Helper", link: "/dashboard/str", icon: <i className="bi bi-alphabet-uppercase" /> },
+      { title: "Regex", link: "/dashboard/regex", icon: <i className="bi bi-regex" /> },
     ],
     [],
   );
