@@ -1,0 +1,53 @@
+@import "../../../assets/scss/configs";
+
+table.calendarContainer {
+  table-layout: fixed;
+  min-width: 800px;
+  width: 100%;
+
+  & th {
+    font-weight: bold;
+    width: calc(100% / 7);
+    padding: 16px;
+    text-align: center;
+    user-select: none;
+  }
+
+  & td {
+    height: 160px;
+  }
+
+  & .day {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    & span {
+      color: $gray-500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      user-select: none;
+    }
+
+    &.inMonth {
+      background-color: $white;
+
+      & span {
+        color: $black;
+      }
+    }
+
+    &.today {
+      background-color: $white;
+
+      & span {
+        color: $white;
+        border-radius: 50%;
+        background-color: $primary;
+      }
+    }
+  }
+}
