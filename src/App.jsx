@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import Navigate from "./components/Common/Navigate";
 import BaseLayout from "./components/Layouts/BaseLayout";
 import DashboardLayout from "./components/Layouts/DashboardLayout";
 import HomePage from "./pages/LoginPage";
@@ -20,6 +21,7 @@ const App = () => {
           <Route index element={<HomePage />} />
         </Route>
         <Route path="dashboard" element={<DashboardLayout />}>
+          <Route index element={<Navigate to={"/dashboard/search"} replace />} />
           <Route path="search" element={<GoogleSearchPage />} />
           <Route path="calendar" element={<CalendarPage />} />
           <Route path="tasks" element={<TaskBoardPage />} />
