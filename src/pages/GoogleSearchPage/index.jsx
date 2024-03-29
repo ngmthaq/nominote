@@ -1,33 +1,29 @@
-import { memo, useState } from "react";
+import { memo, useEffect } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
+import "./style.scss";
 
 const GoogleSearchPage = () => {
-  const [search, setSearch] = useState("");
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    window.open("https://www.google.com.vn/search?q=" + search, "_blank");
-  };
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://cse.google.com/cse.js?cx=32ec940d37e1c451f";
+    document.body.append(script);
+  }, []);
 
   return (
     <div className={classes.googleSearchPage}>
       <PageHeading>Search</PageHeading>
       <div className={classes.container}>
-        <form onSubmit={handleSearch} className="d-flex flex-column align-items-center justify-content-center gap-4">
-          <h1 className="mt-5">Google Search</h1>
-          <input
-            type="text"
-            className="form-control form-control-lg"
-            style={{ maxWidth: "800px" }}
-            placeholder="Enter something here..."
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-          <button className="btn btn-primary mb-5" type="submit">
-            Search
-          </button>
-        </form>
+        <h1 className="text-center mb-3">
+          <span style={{ fontWeight: "800", color: "blue" }}>G</span>
+          <span style={{ fontWeight: "800", color: "red" }}>o</span>
+          <span style={{ fontWeight: "800", color: "orange" }}>o</span>
+          <span style={{ fontWeight: "800", color: "blue" }}>g</span>
+          <span style={{ fontWeight: "800", color: "green" }}>l</span>
+          <span style={{ fontWeight: "800", color: "red" }}>e</span>
+        </h1>
+        <div className="gcse-search"></div>
       </div>
     </div>
   );

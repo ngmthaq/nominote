@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { MAX_NOTE_NUMBER } from "@/configs/app.js";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
+import "./style.scss";
 
 const NoteBookPage = () => {
   const maxNoteNumber = MAX_NOTE_NUMBER;
