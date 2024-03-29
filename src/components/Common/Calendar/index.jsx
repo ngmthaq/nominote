@@ -83,7 +83,7 @@ const Calendar = () => {
       </div>
       <table className={`table table-bordered ${classes.calendarContainer}`}>
         <thead>
-          <tr>
+          <tr className="table-primary">
             <th>Sun</th>
             <th>Mon</th>
             <th>Tue</th>
