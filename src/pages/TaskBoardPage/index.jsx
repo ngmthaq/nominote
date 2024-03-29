@@ -1,5 +1,5 @@
 import { memo, useMemo, useState } from "react";
-import { GET_PRIORITY, MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/app.js";
+import { GET_PRIORITY, MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/app";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
 

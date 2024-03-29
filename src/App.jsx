@@ -9,6 +9,7 @@ import TaskBoardPage from "./pages/TaskBoardPage";
 import RegexPage from "./pages/RegexPage";
 import StringHelperPage from "./pages/StringHelperPage";
 import GoogleSearchPage from "./pages/GoogleSearchPage";
+import SeoPage from "./pages/SeoPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="notebook" element={<NoteBookPage />} />
           <Route path="str" element={<StringHelperPage />} />
           <Route path="regex" element={<RegexPage />} />
+          <Route path="seo" element={<SeoPage />} />
         </Route>
       </Fragment>,
     ),

@@ -18,7 +18,8 @@ const DashboardLayout = () => {
       { title: "Task Board", link: "/dashboard/tasks", icon: <i className="bi bi-table" /> },
       { title: "Note Book", link: "/dashboard/notebook", icon: <i className="bi bi-card-text" /> },
       { title: "String Helper", link: "/dashboard/str", icon: <i className="bi bi-alphabet-uppercase" /> },
-      { title: "Regex", link: "/dashboard/regex", icon: <i className="bi bi-regex" /> },
+      { title: "Regular Expression", link: "/dashboard/regex", icon: <i className="bi bi-regex" /> },
+      { title: "SEO Generator", link: "/dashboard/seo", icon: <i className="bi bi-search-heart" /> },
     ],
     [],
   );

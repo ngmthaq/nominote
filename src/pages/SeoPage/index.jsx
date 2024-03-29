@@ -2,12 +2,12 @@ import { memo } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
 
-const RegexPage = () => {
+const SeoPage = () => {
   return (
-    <div className={classes.regexPage}>
-      <PageHeading>JavaScript Regular Expression</PageHeading>
+    <div className={classes.seoPage}>
+      <PageHeading>SEO Generator</PageHeading>
     </div>
   );
 };
 
-export default memo(RegexPage);
+export default memo(SeoPage);
