@@ -5,9 +5,9 @@ import classes from "./style.module.scss";
 import "./style.scss";
 
 const RegexPage = () => {
-  const [regexString, setRegexString] = useState("");
-  const [regexFlag, setRegexFlag] = useState("");
-  const [testString, setTestString] = useState("");
+  const [regexString, setRegexString] = useState("[a-zA-Z0-9\\s]+");
+  const [regexFlag, setRegexFlag] = useState("g");
+  const [testString, setTestString] = useState("My Test String 12345");
 
   const syntaxHighlight = (json) => {
     if (typeof json != "string") {
