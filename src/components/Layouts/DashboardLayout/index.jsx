@@ -40,6 +40,15 @@ const DashboardLayout = () => {
     setIsMinimize(Boolean(isMobile || isMinimizeLocal));
   }, [isMobile, isMinimizeLocal]);
 
+  useEffect(() => {
+    const route = menuItems.find((item) => item.link === location.pathname);
+    if (route) {
+      document.title = route.title + " | Nominote";
+    } else {
+      document.title = "Nominote";
+    }
+  }, [location]);
+
   return (
     <Fragment>
       <RequestNotification />

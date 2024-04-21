@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from "react";
+import { memo, useState } from "react";
 import { GET_PRIORITY, MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/app";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
@@ -6,14 +6,17 @@ import classes from "./style.module.scss";
 const TaskBoardPage = () => {
   const [tasks, setTasks] = useState(MOCKS);
   const [inputValue, setInputValue] = useState("");
+  const [searchStatus, setSearchStatus] = useState("*");
+  const [searchPriority, setSearchPriority] = useState("*");
 
-  const filteredTasks = useMemo(() => {
-    return tasks
-      .filter((task) => {
-        return task.title.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase().trim());
-      })
-      .reverse();
-  }, [tasks, inputValue]);
+  const filteredTasks = tasks
+    .filter((task) => {
+      const isStatusMatch = searchStatus === "*" ? true : task.status.toString() === searchStatus;
+      const isPriorityMatch = searchPriority === "*" ? true : task.priority.toString() === searchPriority;
+      const isIncludeTitle = task.title.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase().trim());
+      return isIncludeTitle && isPriorityMatch && isStatusMatch;
+    })
+    .reverse();
 
   const handleChangeTaskStatus = (task, status) => {
     setTasks((state) =>
@@ -33,6 +36,14 @@ const TaskBoardPage = () => {
     );
   };
 
+  const handleChangeSearchStatus = (event) => {
+    setSearchStatus(event.target.value);
+  };
+
+  const handleChangeSearchPriority = (event) => {
+    setSearchPriority(event.target.value);
+  };
+
   return (
     <div className={classes.taskBoardPage}>
       <PageHeading>Task Board</PageHeading>
@@ -41,8 +52,8 @@ const TaskBoardPage = () => {
           <div className="col-12">
             <div className={classes.form}>
               <div className="input-group mb-3">
-                <span className="input-group-text">
-                  <i className="bi bi-list-task"></i>
+                <span className="input-group-text" style={{ fontSize: "12px" }}>
+                  Max tasks: {tasks.length} / {MAX_TASK_NUMBER}
                 </span>
                 <input
                   type="text"
@@ -51,71 +62,96 @@ const TaskBoardPage = () => {
                   value={inputValue}
                   onChange={(event) => setInputValue(event.target.value)}
                 />
-                <span className="input-group-text" style={{ fontSize: "12px" }}>
-                  Max Task Number: {tasks.length} / {MAX_TASK_NUMBER}
-                </span>
-              </div>
-              {filteredTasks.length === 0 && (
-                <button className="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center gap-2 mb-2">
+                <select
+                  value={searchStatus}
+                  className="form-select form-select-sm"
+                  style={{ width: "143px", flex: "unset" }}
+                  onChange={handleChangeSearchStatus}
+                >
+                  <option value="*">ALL STATUS</option>
+                  {Object.entries(TASK_STATUS).map(([key, value]) => (
+                    <option key={value} value={value}>
+                      {key.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={searchPriority}
+                  className="form-select form-select-sm"
+                  style={{ width: "160px", flex: "unset" }}
+                  onChange={handleChangeSearchPriority}
+                >
+                  <option value="*">ALL PRIORITIES</option>
+                  {Object.entries(TASK_PRIORITY).map(([key, { value }]) => (
+                    <option key={value} value={value}>
+                      {key.toUpperCase()} PRIORITY
+                    </option>
+                  ))}
+                </select>
+                <button className="btn btn-dark d-flex align-items-center justify-content-center gap-2">
                   <i className="bi bi-plus-lg"></i>
-                  Add new task
+                  ADD
                 </button>
-              )}
+              </div>
               <ul className="list-group list-group-flush">
-                {filteredTasks.map((task, index) => (
-                  <li key={index} className="list-group-item d-flex align-items-center justify-content-between">
-                    <div className="d-flex align-items-center justify-content-end gap-2">
-                      <span
-                        style={{
-                          width: "4px",
-                          height: "12px",
-                          borderRadius: "4px",
-                          background: GET_PRIORITY(task.priority).color,
-                        }}
-                      />
-                      <span
-                        style={{
-                          textDecoration: task.status === TASK_STATUS.resolved ? "line-through" : "none",
-                          display: "block",
-                          minWidth: "280px",
-                          width: "100%",
-                        }}
-                      >
-                        {task.title}
-                      </span>
-                    </div>
-                    <div className="d-flex align-items-center justify-content-end gap-2">
-                      <select
-                        className="form-select form-select-sm"
-                        value={task.status}
-                        onChange={(event) => handleChangeTaskStatus(task, parseInt(event.target.value))}
-                      >
-                        {Object.entries(TASK_STATUS).map(([key, value]) => (
-                          <option key={value} value={value}>
-                            {key.toUpperCase()}
-                          </option>
-                        ))}
-                      </select>
-                      <select
-                        className="form-select form-select-sm"
-                        value={task.priority}
-                        onChange={(event) => handleChangeTaskPriority(task, parseInt(event.target.value))}
-                      >
-                        {Object.entries(TASK_PRIORITY).map(([key, { value }]) => (
-                          <option key={value} value={value}>
-                            {key.toUpperCase()} PRIORITY
-                          </option>
-                        ))}
-                      </select>
-                      <button className="btn btn-sm text-primary">
-                        <i className="bi bi-chat-left-dots-fill"></i>
-                      </button>
-                      <button className="btn btn-sm text-danger">
-                        <i className="bi bi-trash-fill"></i>
-                      </button>
-                    </div>
-                  </li>
-                ))}
+                {filteredTasks.length > 0 ? (
+                  filteredTasks.map((task, index) => (
+                    <li key={index} className="list-group-item d-flex align-items-center justify-content-between">
+                      <div className="d-flex align-items-center justify-content-end gap-2">
+                        <span
+                          style={{
+                            width: "4px",
+                            height: "12px",
+                            borderRadius: "4px",
+                            background: GET_PRIORITY(task.priority).color,
+                          }}
+                        />
+                        <span
+                          style={{
+                            textDecoration: task.status === TASK_STATUS.resolved ? "line-through" : "none",
+                            display: "block",
+                            minWidth: "280px",
+                            width: "100%",
+                          }}
+                        >
+                          {task.title}
+                        </span>
+                      </div>
+                      <div className="d-flex align-items-center justify-content-end gap-2">
+                        <select
+                          className="form-select form-select-sm"
+                          value={task.status}
+                          onChange={(event) => handleChangeTaskStatus(task, parseInt(event.target.value))}
+                        >
+                          {Object.entries(TASK_STATUS).map(([key, value]) => (
+                            <option key={value} value={value}>
+                              {key.toUpperCase()}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className="form-select form-select-sm"
+                          value={task.priority}
+                          onChange={(event) => handleChangeTaskPriority(task, parseInt(event.target.value))}
+                        >
+                          {Object.entries(TASK_PRIORITY).map(([key, { value }]) => (
+                            <option key={value} value={value}>
+                              {key.toUpperCase()} PRIORITY
+                            </option>
+                          ))}
+                        </select>
+                        <button className="btn btn-sm text-primary">
+                          <i className="bi bi-chat-left-dots-fill"></i>
+                        </button>
+                        <button className="btn btn-sm text-danger">
+                          <i className="bi bi-trash-fill"></i>
+                        </button>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <li className="list-group-item text-center">No task found</li>
+                )}
                 <li
                   className="list-group-item mt-3 text-secondary d-flex align-items-center gap-3"
                   style={{ fontSize: "12px" }}
