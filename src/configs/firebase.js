@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,3 +17,18 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseAnalytics = getAnalytics(firebaseApp);
 export const firebaseFirestore = getFirestore(firebaseApp);
+export const firebaseAuth = getAuth(firebaseApp);
+export const firebaseStorage = getStorage(firebaseApp);
+
+export const getAuthenticatedUser = () => {
+  return new Promise((resolve, reject) => {
+    onAuthStateChanged(
+      firebaseAuth,
+      (user) => {
+        if (user) resolve(user);
+        else resolve(null);
+      },
+      (error) => reject(error),
+    );
+  });
+};

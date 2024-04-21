@@ -1,6 +1,9 @@
 import { Fragment, memo, useEffect, useMemo, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { signOut } from "firebase/auth";
+import { firebaseAuth, getAuthenticatedUser } from "@/configs/firebase";
+import Loading from "@/components/Common/Loading";
 import RequestNotification from "@/components/Common/RequestNotification";
 import classes from "./style.module.scss";
 
@@ -26,6 +29,7 @@ const DashboardLayout = () => {
   );
 
   const [isMinimize, setIsMinimize] = useState(Boolean(isMobile || isMinimizeLocal));
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleMinimize = () => {
     setIsMinimize(!isMinimize);
@@ -33,7 +37,9 @@ const DashboardLayout = () => {
     else localStorage.setItem(isMinimizeLocalKey, 1);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    setIsLoading(true);
+    await signOut(firebaseAuth);
     window.location.href = "/";
   };
 
@@ -49,6 +55,17 @@ const DashboardLayout = () => {
       document.title = "Nominote";
     }
   }, [location]);
+
+  useEffect(() => {
+    const middleware = async () => {
+      setIsLoading(true);
+      const user = await getAuthenticatedUser();
+      if (!user) window.location.replace("/");
+      else setIsLoading(false);
+    };
+
+    middleware();
+  }, []);
 
   return (
     <Fragment>
@@ -93,6 +110,7 @@ const DashboardLayout = () => {
           <div className={classes.copyright}>Copyright ©️ 2024 - {new Date().getFullYear()} | ngmthaq</div>
         </div>
       </div>
+      <Loading open={isLoading} />
     </Fragment>
   );
 };
