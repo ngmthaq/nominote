@@ -19,7 +19,7 @@ const DashboardLayout = () => {
       { title: "Note Book", link: "/dashboard/notebook", icon: <i className="bi bi-card-text" /> },
       { title: "String Helper", link: "/dashboard/str", icon: <i className="bi bi-alphabet-uppercase" /> },
       { title: "Regular Expression", link: "/dashboard/regex", icon: <i className="bi bi-regex" /> },
-      { title: "SEO Generator", link: "/dashboard/seo", icon: <i className="bi bi-search-heart" /> },
+      { title: "SEO Meta Generator", link: "/dashboard/seo", icon: <i className="bi bi-search-heart" /> },
     ],
     [],
   );
