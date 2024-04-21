@@ -9,6 +9,7 @@ import NoteBookPage from "./pages/NoteBookPage";
 import TaskBoardPage from "./pages/TaskBoardPage";
 import RegexPage from "./pages/RegexPage";
 import StringHelperPage from "./pages/StringHelperPage";
+import KeyboardHelperPage from "./pages/KeyboardHelperPage";
 import GoogleSearchPage from "./pages/GoogleSearchPage";
 import SeoPage from "./pages/SeoPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="tasks" element={<TaskBoardPage />} />
           <Route path="notebook" element={<NoteBookPage />} />
           <Route path="str" element={<StringHelperPage />} />
+          <Route path="keyboard" element={<KeyboardHelperPage />} />
           <Route path="regex" element={<RegexPage />} />
           <Route path="seo" element={<SeoPage />} />
         </Route>

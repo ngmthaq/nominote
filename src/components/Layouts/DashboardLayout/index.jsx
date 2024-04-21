@@ -18,6 +18,7 @@ const DashboardLayout = () => {
       { title: "Task Board", link: "/_/tasks", icon: <i className="bi bi-table" /> },
       { title: "Note Book", link: "/_/notebook", icon: <i className="bi bi-card-text" /> },
       { title: "String Helper", link: "/_/str", icon: <i className="bi bi-alphabet-uppercase" /> },
+      { title: "Keyboard Helper", link: "/_/keyboard", icon: <i className="bi bi-keyboard" /> },
       { title: "Regular Expression", link: "/_/regex", icon: <i className="bi bi-regex" /> },
       { title: "SEO Meta Generator", link: "/_/seo", icon: <i className="bi bi-search-heart" /> },
     ],
@@ -55,7 +56,6 @@ const DashboardLayout = () => {
       <div className={classes.dashboardLayout}>
         <div className={`${classes.sidebar} ${isMinimize ? classes.minimize : ""}`}>
           <div className={classes.logo}>
-            <img src="/icon-512x512.png" alt="logo" />
             <h3>NOMINOTE</h3>
           </div>
           <div className={classes.nav}>
