@@ -25,6 +25,12 @@
       height: 90px;
       border-bottom: 1px dashed rgba(145, 158, 171, 0.4);
 
+      & img {
+        height: 30px;
+        width: 30px;
+        object-fit: contain;
+      }
+
       & h3 {
         font-weight: bold;
         color: $dark;

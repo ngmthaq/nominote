@@ -56,7 +56,8 @@ const DashboardLayout = () => {
       <div className={classes.dashboardLayout}>
         <div className={`${classes.sidebar} ${isMinimize ? classes.minimize : ""}`}>
           <div className={classes.logo}>
-            <h3>NOMINOTE</h3>
+            <img src="/icon-512x512.png" alt="logo" />
+            <h3>Nominote</h3>
           </div>
           <div className={classes.nav}>
             {menuItems.map((item, index) => (
