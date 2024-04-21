@@ -116,7 +116,7 @@ const RegexPage = () => {
           </div>
         </div>
       </div>
-      <div className={classes.container}>
+      <div className={`${classes.container} my-3`}>
         <CharacterClasses />
       </div>
     </div>

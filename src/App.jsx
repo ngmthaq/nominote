@@ -20,8 +20,8 @@ const App = () => {
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<HomePage />} />
         </Route>
-        <Route path="dashboard" element={<DashboardLayout />}>
-          <Route index element={<Navigate to={"/dashboard/search"} replace />} />
+        <Route path="_" element={<DashboardLayout />}>
+          <Route index element={<Navigate to={"/_/search"} replace />} />
           <Route path="search" element={<GoogleSearchPage />} />
           <Route path="calendar" element={<CalendarPage />} />
           <Route path="tasks" element={<TaskBoardPage />} />
