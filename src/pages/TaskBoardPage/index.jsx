@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
-import { GET_PRIORITY, MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/app";
+import { MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/constants";
+import { getPriority } from "@/configs/utils";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
 
@@ -103,7 +104,7 @@ const TaskBoardPage = () => {
                             width: "4px",
                             height: "12px",
                             borderRadius: "4px",
-                            background: GET_PRIORITY(task.priority).color,
+                            background: getPriority(task.priority).color,
                           }}
                         />
                         <span
@@ -140,9 +141,6 @@ const TaskBoardPage = () => {
                             </option>
                           ))}
                         </select>
-                        <button className="btn btn-sm text-primary">
-                          <i className="bi bi-chat-left-dots-fill"></i>
-                        </button>
                         <button className="btn btn-sm text-danger">
                           <i className="bi bi-trash-fill"></i>
                         </button>
@@ -184,11 +182,11 @@ const TaskBoardPage = () => {
 export default memo(TaskBoardPage);
 
 const MOCKS = [
-  { title: "Have breakfast", priority: 1, status: 1, comments: [] },
-  { title: "Gia Minh interview frontend developer", priority: 1, status: 1, comments: [] },
-  { title: "Collate interview frontend developer", priority: 1, status: 1, comments: [] },
-  { title: "HTC interview frontend developer", priority: 1, status: 1, comments: [] },
-  { title: "Task 5", priority: 1, status: 1, comments: [] },
-  { title: "Task 6", priority: 1, status: 1, comments: [] },
-  { title: "Task 7", priority: 1, status: 2, comments: [] },
+  { title: "Have breakfast", priority: 1, status: 1 },
+  { title: "Gia Minh interview frontend developer", priority: 1, status: 1 },
+  { title: "Collate interview frontend developer", priority: 1, status: 1 },
+  { title: "HTC interview frontend developer", priority: 1, status: 1 },
+  { title: "Task 5", priority: 1, status: 1 },
+  { title: "Task 6", priority: 1, status: 1 },
+  { title: "Task 7", priority: 1, status: 2 },
 ];

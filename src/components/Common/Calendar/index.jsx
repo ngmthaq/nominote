@@ -79,7 +79,6 @@ const Calendar = () => {
         <button className="btn text-secondary flex-shrink-0" onClick={handleNextMonth}>
           <i className="bi bi-chevron-right"></i>
         </button>
-        <button className="btn btn-outline-primary flex-shrink-0">Add New Event</button>
       </div>
       <table className={`table table-bordered ${classes.calendarContainer}`}>
         <thead>

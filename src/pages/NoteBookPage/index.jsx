@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { MAX_NOTE_NUMBER } from "@/configs/app";
+import { MAX_NOTE_NUMBER } from "@/configs/constants";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
 import "./style.scss";
