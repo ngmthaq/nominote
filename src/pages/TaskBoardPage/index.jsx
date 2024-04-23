@@ -1,14 +1,21 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/constants";
 import { getPriority } from "@/configs/utils";
 import PageHeading from "@/components/Common/PageHeading";
+import Loading from "@/components/Common/Loading";
+import useCreateTask from "./hooks/useCreateTask";
+import useTasks from "./hooks/useTasks";
 import classes from "./style.module.scss";
 
 const TaskBoardPage = () => {
-  const [tasks, setTasks] = useState(MOCKS);
+  const createTask = useCreateTask();
+  const { isFetching, tasks: originalTasks } = useTasks();
+
+  const [tasks, setTasks] = useState(originalTasks);
   const [inputValue, setInputValue] = useState("");
   const [searchStatus, setSearchStatus] = useState("*");
   const [searchPriority, setSearchPriority] = useState("*");
+  const [isOpenLoading, setIsOpenLoading] = useState(false);
 
   const filteredTasks = tasks
     .filter((task) => {
@@ -45,8 +52,37 @@ const TaskBoardPage = () => {
     setSearchPriority(event.target.value);
   };
 
+  const handleCreateTask = async () => {
+    if (filteredTasks.length === 0 && inputValue.trim() !== "") {
+      setIsOpenLoading(true);
+      const isSuccess = await createTask(
+        inputValue,
+        searchPriority === "*" ? TASK_PRIORITY.normal.value : parseInt(searchPriority),
+        searchStatus === "*" ? TASK_STATUS.new : parseInt(searchStatus),
+      );
+      setIsOpenLoading(false);
+      if (isSuccess) {
+        setTasks((state) => [
+          ...state,
+          {
+            title: inputValue,
+            priority: searchPriority === "*" ? TASK_PRIORITY.normal.value : parseInt(searchPriority),
+            status: searchStatus === "*" ? TASK_STATUS.new : parseInt(searchStatus),
+          },
+        ]);
+      } else {
+        alert("Create task failed, please try again later");
+      }
+    }
+  };
+
+  useEffect(() => {
+    setTasks(originalTasks);
+  }, [originalTasks]);
+
   return (
     <div className={classes.taskBoardPage}>
+      <Loading open={isOpenLoading || isFetching} />
       <PageHeading>Task Board</PageHeading>
       <div className={classes.container}>
         <div className="row">
@@ -57,7 +93,7 @@ const TaskBoardPage = () => {
                   Max tasks: {tasks.length} / {MAX_TASK_NUMBER}
                 </span>
                 <input
-                  type="text"
+                  type="search"
                   className="form-control"
                   placeholder="Type your to-do task here..."
                   value={inputValue}
@@ -89,7 +125,11 @@ const TaskBoardPage = () => {
                     </option>
                   ))}
                 </select>
-                <button className="btn btn-dark d-flex align-items-center justify-content-center gap-2">
+                <button
+                  className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
+                  disabled={filteredTasks.length > 0 || inputValue.trim() === ""}
+                  onClick={handleCreateTask}
+                >
                   <i className="bi bi-plus-lg"></i>
                   ADD
                 </button>
@@ -126,7 +166,7 @@ const TaskBoardPage = () => {
                         >
                           {Object.entries(TASK_STATUS).map(([key, value]) => (
                             <option key={value} value={value}>
-                              {key.toUpperCase()}
+                              STATUS: {key.toUpperCase()}
                             </option>
                           ))}
                         </select>
@@ -137,7 +177,7 @@ const TaskBoardPage = () => {
                         >
                           {Object.entries(TASK_PRIORITY).map(([key, { value }]) => (
                             <option key={value} value={value}>
-                              {key.toUpperCase()} PRIORITY
+                              PRIORITY: {key.toUpperCase()}
                             </option>
                           ))}
                         </select>
@@ -180,13 +220,3 @@ const TaskBoardPage = () => {
 };
 
 export default memo(TaskBoardPage);
-
-const MOCKS = [
-  { title: "Have breakfast", priority: 1, status: 1 },
-  { title: "Gia Minh interview frontend developer", priority: 1, status: 1 },
-  { title: "Collate interview frontend developer", priority: 1, status: 1 },
-  { title: "HTC interview frontend developer", priority: 1, status: 1 },
-  { title: "Task 5", priority: 1, status: 1 },
-  { title: "Task 6", priority: 1, status: 1 },
-  { title: "Task 7", priority: 1, status: 2 },
-];
