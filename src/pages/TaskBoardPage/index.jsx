@@ -4,11 +4,15 @@ import { getPriority } from "@/configs/utils";
 import PageHeading from "@/components/Common/PageHeading";
 import Loading from "@/components/Common/Loading";
 import useCreateTask from "./hooks/useCreateTask";
+import useUpdateTask from "./hooks/useUpdateTask";
+import useDeleteTask from "./hooks/useDeleteTask";
 import useTasks from "./hooks/useTasks";
 import classes from "./style.module.scss";
 
 const TaskBoardPage = () => {
   const createTask = useCreateTask();
+  const updateTask = useUpdateTask();
+  const deleteTask = useDeleteTask();
   const { isFetching, tasks: originalTasks } = useTasks();
 
   const [tasks, setTasks] = useState(originalTasks);
@@ -26,22 +30,36 @@ const TaskBoardPage = () => {
     })
     .reverse();
 
-  const handleChangeTaskStatus = (task, status) => {
-    setTasks((state) =>
-      state.map((taskItem) => {
-        if (taskItem.title === task.title) return { ...taskItem, status };
-        return taskItem;
-      }),
-    );
+  const handleChangeTaskStatus = async (task, status) => {
+    setIsOpenLoading(true);
+    const isSuccess = await updateTask(task.id, task.title, task.priority, status);
+    setIsOpenLoading(false);
+    if (isSuccess) {
+      setTasks((state) =>
+        state.map((taskItem) => {
+          if (taskItem.title === task.title) return { ...taskItem, status };
+          return taskItem;
+        }),
+      );
+    } else {
+      alert("Cannot update this task, please try again later");
+    }
   };
 
-  const handleChangeTaskPriority = (task, priority) => {
-    setTasks((state) =>
-      state.map((taskItem) => {
-        if (taskItem.title === task.title) return { ...taskItem, priority };
-        return taskItem;
-      }),
-    );
+  const handleChangeTaskPriority = async (task, priority) => {
+    setIsOpenLoading(true);
+    const isSuccess = await updateTask(task.id, task.title, priority, task.status);
+    setIsOpenLoading(false);
+    if (isSuccess) {
+      setTasks((state) =>
+        state.map((taskItem) => {
+          if (taskItem.title === task.title) return { ...taskItem, priority };
+          return taskItem;
+        }),
+      );
+    } else {
+      alert("Cannot update this task, please try again later");
+    }
   };
 
   const handleChangeSearchStatus = (event) => {
@@ -72,6 +90,19 @@ const TaskBoardPage = () => {
         ]);
       } else {
         alert("Create task failed, please try again later");
+      }
+    }
+  };
+
+  const handleDeleteTask = async (task) => {
+    if (confirm(`Do you want to delete this task?\n${task.title}`)) {
+      setIsOpenLoading(true);
+      const isSuccess = await deleteTask(task.id);
+      setIsOpenLoading(false);
+      if (isSuccess) {
+        setTasks((state) => state.filter((data) => data.id !== task.id));
+      } else {
+        alert("Delete task failed, please try again later");
       }
     }
   };
@@ -181,7 +212,7 @@ const TaskBoardPage = () => {
                             </option>
                           ))}
                         </select>
-                        <button className="btn btn-sm text-danger">
+                        <button className="btn btn-sm text-danger" onClick={() => handleDeleteTask(task)}>
                           <i className="bi bi-trash-fill"></i>
                         </button>
                       </div>

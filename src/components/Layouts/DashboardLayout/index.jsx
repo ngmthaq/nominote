@@ -30,6 +30,7 @@ const DashboardLayout = () => {
 
   const [isMinimize, setIsMinimize] = useState(Boolean(isMobile || isMinimizeLocal));
   const [isLoading, setIsLoading] = useState(false);
+  const [isTransparentLoading, setIsTransparentLoading] = useState(false);
 
   const handleToggleMinimize = () => {
     setIsMinimize(!isMinimize);
@@ -38,6 +39,7 @@ const DashboardLayout = () => {
   };
 
   const handleLogout = async () => {
+    setIsTransparentLoading(false);
     setIsLoading(true);
     await signOut(firebaseAuth);
     window.location.href = "/";
@@ -110,7 +112,7 @@ const DashboardLayout = () => {
           <div className={classes.copyright}>Copyright ©️ 2024 - {new Date().getFullYear()} | ngmthaq</div>
         </div>
       </div>
-      <Loading open={isLoading} />
+      <Loading open={isLoading} isTransparent={isTransparentLoading} />
     </Fragment>
   );
 };
