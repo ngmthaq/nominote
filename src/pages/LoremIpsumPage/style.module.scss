@@ -1,0 +1,13 @@
+@import "../../assets/scss/configs";
+
+.stringHelperPage {
+  position: static;
+
+  & .container {
+    background-color: $white;
+    border-radius: $border-radius;
+    margin: 0 32px;
+    padding: 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+}

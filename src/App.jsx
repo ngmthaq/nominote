@@ -14,6 +14,7 @@ import RandomTextPage from "./pages/RandomTextPage";
 import WordCountPage from "./pages/WordCountPage";
 import UTCDateTimePage from "./pages/UTCDateTimePage";
 import Milliseconds2DatePage from "./pages/Milliseconds2DatePage";
+import LoremIpsumPage from "./pages/LoremIpsumPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="text/converter" element={<TextConverterPage />} />
           <Route path="text/random" element={<RandomTextPage />} />
           <Route path="text/count" element={<WordCountPage />} />
+          <Route path="text/loremipsum" element={<LoremIpsumPage />} />
           <Route path="keyboard/event" element={<KeyboardEventPage />} />
           <Route path="html/seo" element={<SeoPage />} />
           <Route path="js/regex" element={<RegexPage />} />
