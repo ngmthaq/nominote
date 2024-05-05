@@ -111,22 +111,22 @@ const TextConverterPage = () => {
           </div>
           <div className="col-12">
             <div className="d-flex align-items-center justify-content-start gap-2">
-              <button className="btn btn-outline-primary" onClick={convertToUpperCase}>
+              <button className="btn btn-outline-primary" style={{ alignSelf: "normal" }} onClick={convertToUpperCase}>
                 CONVERT TO UPPERCASE
               </button>
-              <button className="btn btn-outline-primary" onClick={convertToLowerCase}>
+              <button className="btn btn-outline-primary" style={{ alignSelf: "normal" }} onClick={convertToLowerCase}>
                 convert to lowercase
               </button>
-              <button className="btn btn-outline-primary" onClick={capitalizeFirstWord}>
+              <button className="btn btn-outline-primary" style={{ alignSelf: "normal" }} onClick={capitalizeFirstWord}>
                 Capitalize first word
               </button>
-              <button className="btn btn-outline-primary" onClick={capitalizeEachWord}>
+              <button className="btn btn-outline-primary" style={{ alignSelf: "normal" }} onClick={capitalizeEachWord}>
                 Capitalize Each Word
               </button>
-              <button className="btn btn-outline-primary" onClick={convertToSlug}>
+              <button className="btn btn-outline-primary" style={{ alignSelf: "normal" }} onClick={convertToSlug}>
                 convert-to-slug
               </button>
-              <button className="btn btn-outline-primary" onClick={clear}>
+              <button className="btn btn-outline-primary" style={{ alignSelf: "normal" }} onClick={clear}>
                 Clear
               </button>
             </div>

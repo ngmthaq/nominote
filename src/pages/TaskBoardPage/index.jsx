@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { MAX_TASK_NUMBER, TASK_PRIORITY, TASK_STATUS } from "@/configs/constants";
+import { TASK_PRIORITY, TASK_STATUS } from "@/configs/constants";
 import { getPriority } from "@/configs/utils";
 import PageHeading from "@/components/Common/PageHeading";
 import Loading from "@/components/Common/Loading";
@@ -17,16 +17,12 @@ const TaskBoardPage = () => {
 
   const [tasks, setTasks] = useState(originalTasks);
   const [inputValue, setInputValue] = useState("");
-  const [searchStatus, setSearchStatus] = useState("*");
-  const [searchPriority, setSearchPriority] = useState("*");
   const [isOpenLoading, setIsOpenLoading] = useState(false);
 
   const filteredTasks = tasks
     .filter((task) => {
-      const isStatusMatch = searchStatus === "*" ? true : task.status.toString() === searchStatus;
-      const isPriorityMatch = searchPriority === "*" ? true : task.priority.toString() === searchPriority;
       const isIncludeTitle = task.title.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase().trim());
-      return isIncludeTitle && isPriorityMatch && isStatusMatch;
+      return isIncludeTitle;
     })
     .reverse();
 
@@ -62,30 +58,17 @@ const TaskBoardPage = () => {
     }
   };
 
-  const handleChangeSearchStatus = (event) => {
-    setSearchStatus(event.target.value);
-  };
-
-  const handleChangeSearchPriority = (event) => {
-    setSearchPriority(event.target.value);
-  };
-
   const handleCreateTask = async () => {
     if (filteredTasks.length === 0 && inputValue.trim() !== "") {
       setIsOpenLoading(true);
-      const isSuccess = await createTask(
-        inputValue,
-        searchPriority === "*" ? TASK_PRIORITY.normal.value : parseInt(searchPriority),
-        searchStatus === "*" ? TASK_STATUS.new : parseInt(searchStatus),
-      );
+      const isSuccess = await createTask(inputValue);
       setIsOpenLoading(false);
       if (isSuccess) {
+        setInputValue("");
         setTasks((state) => [
           ...state,
           {
             title: inputValue,
-            priority: searchPriority === "*" ? TASK_PRIORITY.normal.value : parseInt(searchPriority),
-            status: searchStatus === "*" ? TASK_STATUS.new : parseInt(searchStatus),
           },
         ]);
       } else {
@@ -120,9 +103,6 @@ const TaskBoardPage = () => {
           <div className="col-12">
             <div className={classes.form}>
               <div className="input-group mb-3">
-                <span className="input-group-text" style={{ fontSize: "12px" }}>
-                  Max tasks: {tasks.length} / {MAX_TASK_NUMBER}
-                </span>
                 <input
                   type="search"
                   className="form-control"
@@ -130,32 +110,6 @@ const TaskBoardPage = () => {
                   value={inputValue}
                   onChange={(event) => setInputValue(event.target.value)}
                 />
-                <select
-                  value={searchStatus}
-                  className="form-select form-select-sm"
-                  style={{ width: "143px", flex: "unset" }}
-                  onChange={handleChangeSearchStatus}
-                >
-                  <option value="*">ALL STATUS</option>
-                  {Object.entries(TASK_STATUS).map(([key, value]) => (
-                    <option key={value} value={value}>
-                      {key.toUpperCase()}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={searchPriority}
-                  className="form-select form-select-sm"
-                  style={{ width: "160px", flex: "unset" }}
-                  onChange={handleChangeSearchPriority}
-                >
-                  <option value="*">ALL PRIORITIES</option>
-                  {Object.entries(TASK_PRIORITY).map(([key, { value }]) => (
-                    <option key={value} value={value}>
-                      {key.toUpperCase()} PRIORITY
-                    </option>
-                  ))}
-                </select>
                 <button
                   className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
                   disabled={filteredTasks.length > 0 || inputValue.trim() === ""}
@@ -225,6 +179,8 @@ const TaskBoardPage = () => {
                   className="list-group-item mt-3 text-secondary d-flex align-items-center gap-3"
                   style={{ fontSize: "12px" }}
                 >
+                  <span>Total: {tasks.length} task(s)</span>
+                  <span>|</span>
                   <span>Found: {filteredTasks.length} task(s)</span>
                   <span>|</span>
                   <span>

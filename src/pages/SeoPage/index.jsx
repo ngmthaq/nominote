@@ -164,8 +164,8 @@ const SeoPage = () => {
                 <meta property="twitter:image" content="${form.image}" />
                 <title>${form.title}</title>
                 <link rel="canonical" href="${form.url}" />
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="apple-touch-icon" href="/logo192.png" />
+                <link rel="icon" href="${form.image}" />
+                <link rel="apple-touch-icon" href="${form.image}" />
               `}
               disabled
             ></textarea>
