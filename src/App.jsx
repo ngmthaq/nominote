@@ -16,6 +16,7 @@ import UTCDateTimePage from "./pages/UTCDateTimePage";
 import Milliseconds2DatePage from "./pages/Milliseconds2DatePage";
 import LoremIpsumPage from "./pages/LoremIpsumPage";
 import TailwindCssCheatseetPage from "./pages/TailwindCssCheatseetPage";
+import BootstrapCheatseetPage from "./pages/BootstrapCheatseetPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -34,7 +35,8 @@ const App = () => {
           <Route path="text/loremipsum" element={<LoremIpsumPage />} />
           <Route path="keyboard/event" element={<KeyboardEventPage />} />
           <Route path="html/seo" element={<SeoPage />} />
-          <Route path="css/tailwindcss" element={<TailwindCssCheatseetPage />} />
+          <Route path="css/tailwind" element={<TailwindCssCheatseetPage />} />
+          <Route path="css/bootstrap" element={<BootstrapCheatseetPage />} />
           <Route path="js/regex" element={<RegexPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
