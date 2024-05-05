@@ -20,6 +20,7 @@ const DashboardLayout = () => {
       { title: "Text Helpers", link: "@divider" },
       { title: "Text Converter", link: "/_/text/converter", icon: <i className="bi bi-type" /> },
       { title: "Random Text", link: "/_/text/random", icon: <i className="bi bi-alphabet-uppercase" /> },
+      { title: "Word Counter", link: "/_/text/count", icon: <i className="bi bi-123" /> },
       { title: "Keyboard Helpers", link: "@divider" },
       { title: "Keyboard Event", link: "/_/keyboard/event", icon: <i className="bi bi-keyboard" /> },
       { title: "HTML/CSS/JS Helpers", link: "@divider" },

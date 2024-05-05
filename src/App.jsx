@@ -11,6 +11,7 @@ import GoogleSearchPage from "./pages/GoogleSearchPage";
 import SeoPage from "./pages/SeoPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RandomTextPage from "./pages/RandomTextPage";
+import WordCountPage from "./pages/WordCountPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="tasks" element={<TaskBoardPage />} />
           <Route path="text/converter" element={<TextConverterPage />} />
           <Route path="text/random" element={<RandomTextPage />} />
+          <Route path="text/count" element={<WordCountPage />} />
           <Route path="keyboard/event" element={<KeyboardEventPage />} />
           <Route path="html/seo" element={<SeoPage />} />
           <Route path="js/regex" element={<RegexPage />} />
