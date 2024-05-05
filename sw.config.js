@@ -22,9 +22,9 @@ export const pwaPlugin = VitePWA({
     display: "standalone",
     scope: "/",
     start_url: "/",
-    name: "Nominote",
+    name: "Nominote DevTools",
     short_name: "Nominote",
-    description: "A flexible notebook",
+    description: "All-in-one developers tools in one place",
     icons: [
       {
         src: "/icon-192x192.png",
