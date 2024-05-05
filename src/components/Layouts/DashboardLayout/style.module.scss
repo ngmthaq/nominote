@@ -90,6 +90,10 @@
     &.minimize {
       width: 80px;
 
+      & .search {
+        display: none;
+      }
+
       & .logo h3 {
         display: none;
       }

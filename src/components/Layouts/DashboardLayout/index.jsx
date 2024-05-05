@@ -75,7 +75,12 @@ const DashboardLayout = () => {
         </div>
         <div className={classes.nav}>
           <div className="mt-4 px-3">
-            <input type="email" className="form-control" placeholder="Search Tool" onChange={handleSearch} />
+            <input
+              type="search"
+              className={`form-control ${classes.search}`}
+              placeholder="Search Tool"
+              onChange={handleSearch}
+            />
           </div>
           {filterNavItems.map((item, index) =>
             item.link === "@divider" ? (
