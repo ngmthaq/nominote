@@ -35,7 +35,7 @@ const SeoPage = () => {
 
   return (
     <div className={classes.seoPage}>
-      <PageHeading>SEO Meta Generator</PageHeading>
+      <PageHeading>HTML SEO Meta Generator</PageHeading>
       <div className={classes.container}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
@@ -172,7 +172,7 @@ const SeoPage = () => {
           </div>
         ) : (
           <p className="mt-4 text-danger">
-            <small>**NOTE: Completely fill in all fields for the system to process the data</small>
+            <small>**NOTE: Completely fill in all fields for the system to process the data automatically</small>
           </p>
         )}
       </div>

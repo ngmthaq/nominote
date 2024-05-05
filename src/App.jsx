@@ -5,11 +5,12 @@ import DashboardLayout from "./components/Layouts/DashboardLayout";
 import CalendarPage from "./pages/CalendarPage";
 import TaskBoardPage from "./pages/TaskBoardPage";
 import RegexPage from "./pages/RegexPage";
-import StringHelperPage from "./pages/StringHelperPage";
-import KeyboardHelperPage from "./pages/KeyboardHelperPage";
+import TextConverterPage from "./pages/TextConverterPage";
+import KeyboardEventPage from "./pages/KeyboardEventPage";
 import GoogleSearchPage from "./pages/GoogleSearchPage";
 import SeoPage from "./pages/SeoPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import RandomTextPage from "./pages/RandomTextPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -20,10 +21,11 @@ const App = () => {
           <Route path="search" element={<GoogleSearchPage />} />
           <Route path="calendar" element={<CalendarPage />} />
           <Route path="tasks" element={<TaskBoardPage />} />
-          <Route path="str" element={<StringHelperPage />} />
-          <Route path="keyboard" element={<KeyboardHelperPage />} />
-          <Route path="regex" element={<RegexPage />} />
-          <Route path="seo" element={<SeoPage />} />
+          <Route path="text/converter" element={<TextConverterPage />} />
+          <Route path="text/random" element={<RandomTextPage />} />
+          <Route path="keyboard/event" element={<KeyboardEventPage />} />
+          <Route path="html/seo" element={<SeoPage />} />
+          <Route path="js/regex" element={<RegexPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Fragment>,

@@ -47,6 +47,14 @@
         display: none;
       }
 
+      & .divider {
+        border-bottom: 1px dashed rgba(145, 158, 171, 0.4);
+        margin: 8px 12px;
+        margin-top: 24px;
+        text-transform: uppercase;
+        color: $gray-600;
+      }
+
       & a {
         display: flex;
         align-items: center;

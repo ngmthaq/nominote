@@ -13,13 +13,18 @@ const DashboardLayout = () => {
 
   const menuItems = useMemo(
     () => [
+      { title: "Common Helpers", link: "@divider" },
       { title: "Search", link: "/_/search", icon: <i className="bi bi-google"></i> },
       { title: "Calendar", link: "/_/calendar", icon: <i className="bi bi-calendar-week-fill" /> },
       { title: "Task Board", link: "/_/tasks", icon: <i className="bi bi-table" /> },
-      { title: "String Helper", link: "/_/str", icon: <i className="bi bi-alphabet-uppercase" /> },
-      { title: "Keyboard Helper", link: "/_/keyboard", icon: <i className="bi bi-keyboard" /> },
-      { title: "Regular Expression", link: "/_/regex", icon: <i className="bi bi-regex" /> },
-      { title: "SEO Meta Generator", link: "/_/seo", icon: <i className="bi bi-search-heart" /> },
+      { title: "Text Helpers", link: "@divider" },
+      { title: "Text Converter", link: "/_/text/converter", icon: <i className="bi bi-type" /> },
+      { title: "Random Text", link: "/_/text/random", icon: <i className="bi bi-alphabet-uppercase" /> },
+      { title: "Keyboard Helpers", link: "@divider" },
+      { title: "Keyboard Event", link: "/_/keyboard/event", icon: <i className="bi bi-keyboard" /> },
+      { title: "HTML/CSS/JS Helpers", link: "@divider" },
+      { title: "SEO Meta Generator", link: "/_/html/seo", icon: <i className="bi bi-search-heart" /> },
+      { title: "Javascript RegEx", link: "/_/js/regex", icon: <i className="bi bi-regex" /> },
     ],
     [],
   );
@@ -53,17 +58,23 @@ const DashboardLayout = () => {
           <h3>Nominote</h3>
         </div>
         <div className={classes.nav}>
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              to={item.link}
-              title={isMinimize ? item.title : ""}
-              className={`${item.link === location.pathname ? classes.active : ""}`}
-            >
-              {item.icon}
-              <span>{item.title}</span>
-            </Link>
-          ))}
+          {menuItems.map((item, index) =>
+            item.link === "@divider" ? (
+              <div key={index} className={classes.divider}>
+                <small>{item.title}</small>
+              </div>
+            ) : (
+              <Link
+                key={index}
+                to={item.link}
+                title={isMinimize ? item.title : ""}
+                className={`${item.link === location.pathname ? classes.active : ""}`}
+              >
+                {item.icon}
+                <span>{item.title}</span>
+              </Link>
+            ),
+          )}
         </div>
         <div className={classes.menu}>
           {isMobile ? (

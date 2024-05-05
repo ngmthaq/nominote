@@ -1,15 +1,11 @@
 import { memo, useRef, useState } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
-import { generateRandomString } from "@/helpers/str";
 
-const StringHelperPage = () => {
+const TextConverterPage = () => {
   const ref1 = useRef();
-  const ref2 = useRef();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [randomStringLength, setRandomStringLength] = useState(16);
-  const [randomString, setRandomString] = useState("");
 
   const convertToUpperCase = () => {
     setOutput(input.toUpperCase());
@@ -70,8 +66,8 @@ const StringHelperPage = () => {
 
   return (
     <div className={classes.stringHelperPage}>
-      <PageHeading>String Helper</PageHeading>
-      <div className={`${classes.container} mb-3`}>
+      <PageHeading>Text Converter</PageHeading>
+      <div className={`${classes.container}`}>
         <div className="row">
           <div className="col-12">
             <div className="mb-4">
@@ -115,71 +111,30 @@ const StringHelperPage = () => {
           </div>
           <div className="col-12">
             <div className="d-flex align-items-center justify-content-start gap-2">
-              <button className="btn btn-outline-secondary" onClick={convertToUpperCase}>
+              <button className="btn btn-outline-primary" onClick={convertToUpperCase}>
                 CONVERT TO UPPERCASE
               </button>
-              <button className="btn btn-outline-secondary" onClick={convertToLowerCase}>
+              <button className="btn btn-outline-primary" onClick={convertToLowerCase}>
                 convert to lowercase
               </button>
-              <button className="btn btn-outline-secondary" onClick={capitalizeFirstWord}>
+              <button className="btn btn-outline-primary" onClick={capitalizeFirstWord}>
                 Capitalize first word
               </button>
-              <button className="btn btn-outline-secondary" onClick={capitalizeEachWord}>
+              <button className="btn btn-outline-primary" onClick={capitalizeEachWord}>
                 Capitalize Each Word
               </button>
-              <button className="btn btn-outline-secondary" onClick={convertToSlug}>
+              <button className="btn btn-outline-primary" onClick={convertToSlug}>
                 convert-to-slug
               </button>
-              <button className="btn btn-outline-secondary" onClick={clear}>
+              <button className="btn btn-outline-primary" onClick={clear}>
                 Clear
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className={classes.container}>
-        <label htmlFor="output" className="form-label d-flex align-items-center justify-content-between">
-          <strong>
-            Random string with
-            <input
-              type="number"
-              style={{ width: "60px", margin: "0 4px", textAlign: "center" }}
-              value={randomStringLength}
-              onChange={(event) => setRandomStringLength(event.target.value)}
-            />
-            character(s)
-          </strong>
-          <div>
-            <button
-              className="btn btn-sm btn-primary me-3"
-              title="Copy"
-              onClick={() => setRandomString(generateRandomString(randomStringLength))}
-            >
-              <span className="d-inline-block">Generate</span>
-            </button>
-            <button
-              className="btn btn-sm btn-success"
-              title="Copy"
-              disabled={randomString.trim() === ""}
-              onClick={() => copy(ref2)}
-            >
-              <i className="bi bi-clipboard"></i>
-              <span className="ms-2 d-inline-block">Copy</span>
-            </button>
-          </div>
-        </label>
-        <textarea
-          className="form-control"
-          id="output"
-          rows="6"
-          placeholder="Here is your output value"
-          disabled={true}
-          value={randomString}
-          ref={ref2}
-        ></textarea>
-      </div>
     </div>
   );
 };
 
-export default memo(StringHelperPage);
+export default memo(TextConverterPage);

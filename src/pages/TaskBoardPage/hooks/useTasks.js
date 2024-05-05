@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEYS } from "@/configs/constants";
 
 export default function useTasks() {
-  const [isFetching, setIsFetching] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {

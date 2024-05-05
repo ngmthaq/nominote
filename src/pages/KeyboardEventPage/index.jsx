@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
 
-const KeyboardHelperPage = () => {
+const KeyboardEventPage = () => {
   const [event, setEvent] = useState(null);
 
   const handleKeyboardEvent = (event) => {
@@ -17,7 +17,7 @@ const KeyboardHelperPage = () => {
 
   return (
     <div className={classes.keyboardHelperPage}>
-      <PageHeading>Keyboard Helper</PageHeading>
+      <PageHeading>Keyboard Event</PageHeading>
       <div className={classes.container}>
         {event ? <p>You pressed {event?.code}</p> : <p>Press any key to see the information</p>}
         <table className="table table-bordered">
@@ -63,4 +63,4 @@ const KeyboardHelperPage = () => {
   );
 };
 
-export default memo(KeyboardHelperPage);
+export default memo(KeyboardEventPage);

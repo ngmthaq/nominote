@@ -20,5 +20,6 @@ export function generateRandomString(length) {
   } catch (error) {
     console.error(error);
     alert("Something wrong, please try again later");
+    return "";
   }
 }
