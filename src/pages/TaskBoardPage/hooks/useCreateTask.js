@@ -1,15 +1,16 @@
-import { doc, setDoc } from "firebase/firestore";
-import { firebaseFirestore } from "@/configs/firebase";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants";
 import { generateRandomString } from "@/helpers/str";
 
 export default function useCreateTask() {
   return async (title, priority, status) => {
     try {
-      const payload = { title, priority, status };
-      console.log("Firestore - useCreateTask payload:", payload);
-      const ref = doc(firebaseFirestore, "tasks", Date.now() + generateRandomString(8));
-      const response = await setDoc(ref, payload);
-      console.log("Firestore - useCreateTask response:", response);
+      const id = Date.now() + "_" + generateRandomString(16);
+      const payload = { id, title, priority, status };
+      const json = localStorage.getItem(LOCAL_STORAGE_KEYS.todoList) || "[]";
+      const list = JSON.parse(json);
+      const newList = [...list, payload];
+      localStorage.setItem(LOCAL_STORAGE_KEYS.todoList, JSON.stringify(newList));
+      console.log("useCreateTask", payload);
       return true;
     } catch (error) {
       console.error(error);

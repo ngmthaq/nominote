@@ -39,26 +39,26 @@ const SeoPage = () => {
       <div className={classes.container}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
-            Title
+            Website Title
           </label>
           <input
             type="text"
             className="form-control"
             id="title"
-            placeholder="Enter your web title here"
+            placeholder="Should be a maximum of 20 characters"
             value={form.title}
             onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="desc" className="form-label">
-            Description
+            Website Description
           </label>
           <input
             type="text"
             className="form-control"
             id="desc"
-            placeholder="Enter your web description here"
+            placeholder="Should be a maximum of 50 characters"
             value={form.desc}
             onChange={handleInputChange}
           />
@@ -71,20 +71,20 @@ const SeoPage = () => {
             type="text"
             className="form-control"
             id="url"
-            placeholder="Enter your web URL here"
+            placeholder="https://example.com"
             value={form.url}
             onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="image" className="form-label">
-            Web SEO Image
+            Web SEO Image URL
           </label>
           <input
             type="text"
             className="form-control"
             id="image"
-            placeholder="Enter your web image here"
+            placeholder="Must be in full URL. Ex: https://example.com/an-amazing-image.png"
             value={form.image}
             onChange={handleInputChange}
           />
@@ -115,12 +115,17 @@ const SeoPage = () => {
             onChange={handleInputChange}
           />
         </div>
-        {form.author && form.desc && form.image && form.keywords && form.title && form.url && (
+        {form.author && form.desc && form.image && form.keywords && form.title && form.url ? (
           <div>
             <div className="form-label d-flex align-items-center justify-content-between">
               <div className="w-100">HTML Meta Tags</div>
-              <button className="btn btn-sm btn-outline-primary" title="Copy" onClick={copy}>
+              <button
+                className="btn btn-sm btn-primary d-flex align-items-center justify-content-center"
+                title="Copy"
+                onClick={copy}
+              >
                 <i className="bi bi-clipboard"></i>
+                <span className="d-inline-block ms-2">Copy</span>
               </button>
             </div>
             <textarea
@@ -165,6 +170,10 @@ const SeoPage = () => {
               disabled
             ></textarea>
           </div>
+        ) : (
+          <p className="mt-4 text-danger">
+            <small>**NOTE: Completely fill in all fields for the system to process the data</small>
+          </p>
         )}
       </div>
     </div>

@@ -1,11 +1,15 @@
 import { memo, useRef, useState } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import classes from "./style.module.scss";
+import { generateRandomString } from "@/helpers/str";
 
 const StringHelperPage = () => {
-  const ref = useRef();
+  const ref1 = useRef();
+  const ref2 = useRef();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [randomStringLength, setRandomStringLength] = useState(16);
+  const [randomString, setRandomString] = useState("");
 
   const convertToUpperCase = () => {
     setOutput(input.toUpperCase());
@@ -43,7 +47,7 @@ const StringHelperPage = () => {
     );
   };
 
-  const copy = () => {
+  const copy = (ref) => {
     if (
       window.location.protocol === "https" ||
       window.location.hostname === "localhost" ||
@@ -67,12 +71,12 @@ const StringHelperPage = () => {
   return (
     <div className={classes.stringHelperPage}>
       <PageHeading>String Helper</PageHeading>
-      <div className={classes.container}>
+      <div className={`${classes.container} mb-3`}>
         <div className="row">
           <div className="col-12">
             <div className="mb-4">
               <label htmlFor="input" className="form-label">
-                <strong>Input</strong>
+                <strong>Text Converter Input</strong>
               </label>
               <textarea
                 className="form-control"
@@ -87,14 +91,15 @@ const StringHelperPage = () => {
           <div className="col-12">
             <div className="mb-4">
               <label htmlFor="output" className="form-label d-flex align-items-center justify-content-between">
-                <strong>Output</strong>
+                <strong>Text Converter Output</strong>
                 <button
-                  className="btn btn-sm btn-outline-primary"
+                  className="btn btn-sm btn-success"
                   title="Copy"
                   disabled={output.trim() === ""}
-                  onClick={copy}
+                  onClick={() => copy(ref1)}
                 >
                   <i className="bi bi-clipboard"></i>
+                  <span className="ms-2 d-inline-block">Copy</span>
                 </button>
               </label>
               <textarea
@@ -104,7 +109,7 @@ const StringHelperPage = () => {
                 placeholder="Here is your output value"
                 disabled={true}
                 value={output}
-                ref={ref}
+                ref={ref1}
               ></textarea>
             </div>
           </div>
@@ -131,6 +136,47 @@ const StringHelperPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className={classes.container}>
+        <label htmlFor="output" className="form-label d-flex align-items-center justify-content-between">
+          <strong>
+            Random string with
+            <input
+              type="number"
+              style={{ width: "60px", margin: "0 4px", textAlign: "center" }}
+              value={randomStringLength}
+              onChange={(event) => setRandomStringLength(event.target.value)}
+            />
+            character(s)
+          </strong>
+          <div>
+            <button
+              className="btn btn-sm btn-primary me-3"
+              title="Copy"
+              onClick={() => setRandomString(generateRandomString(randomStringLength))}
+            >
+              <span className="d-inline-block">Generate</span>
+            </button>
+            <button
+              className="btn btn-sm btn-success"
+              title="Copy"
+              disabled={randomString.trim() === ""}
+              onClick={() => copy(ref2)}
+            >
+              <i className="bi bi-clipboard"></i>
+              <span className="ms-2 d-inline-block">Copy</span>
+            </button>
+          </div>
+        </label>
+        <textarea
+          className="form-control"
+          id="output"
+          rows="6"
+          placeholder="Here is your output value"
+          disabled={true}
+          value={randomString}
+          ref={ref2}
+        ></textarea>
       </div>
     </div>
   );

@@ -1,23 +1,18 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
-import { firebaseFirestore } from "@/configs/firebase";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants";
 
 export default function useTasks() {
   const [isFetching, setIsFetching] = useState(true);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const stm = query(collection(firebaseFirestore, "tasks"));
-    getDocs(stm)
-      .then((snapshot) => {
-        const shape = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setTasks(shape);
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setIsFetching(false));
+    const json = localStorage.getItem(LOCAL_STORAGE_KEYS.todoList) || "[]";
+    const list = JSON.parse(json);
+    setTasks(list);
+    setIsFetching(false);
   }, []);
 
-  console.log("useTasks data:", tasks);
+  console.log("useTasks:", tasks);
 
   return { isFetching, tasks };
 }

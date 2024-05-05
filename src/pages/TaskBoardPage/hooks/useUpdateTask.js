@@ -1,15 +1,16 @@
-import { doc, setDoc } from "firebase/firestore";
-import { firebaseFirestore } from "@/configs/firebase";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants";
 
 export default function useUpdateTask() {
   return async (id, title, priority, status) => {
     try {
-      const payload = { title, priority, status };
-      console.log("Firestore - useUpdateTask id:", id);
-      console.log("Firestore - useUpdateTask payload:", payload);
-      const ref = doc(firebaseFirestore, "tasks", id);
-      const response = await setDoc(ref, payload);
-      console.log("Firestore - useUpdateTask response:", response);
+      console.log("useUpdateTask id:", id);
+      const json = localStorage.getItem(LOCAL_STORAGE_KEYS.todoList) || "[]";
+      const list = JSON.parse(json);
+      const newList = list.map((item) => {
+        if (item.id !== id) return item;
+        return { ...item, title, priority, status };
+      });
+      localStorage.setItem(LOCAL_STORAGE_KEYS.todoList, JSON.stringify(newList));
       return true;
     } catch (error) {
       console.error(error);

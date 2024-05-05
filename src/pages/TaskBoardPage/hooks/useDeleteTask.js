@@ -1,13 +1,13 @@
-import { deleteDoc, doc } from "firebase/firestore";
-import { firebaseFirestore } from "@/configs/firebase";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants";
 
 export default function useDeleteTask() {
   return async (id) => {
     try {
-      console.log("Firestore - useDeleteTask id:", id);
-      const ref = doc(firebaseFirestore, "tasks", id);
-      const response = await deleteDoc(ref);
-      console.log("Firestore - useDeleteTask response:", response);
+      console.log("useDeleteTask id:", id);
+      const json = localStorage.getItem(LOCAL_STORAGE_KEYS.todoList) || "[]";
+      const list = JSON.parse(json);
+      const newList = list.filter((item) => item.id !== id);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.todoList, JSON.stringify(newList));
       return true;
     } catch (error) {
       console.error(error);

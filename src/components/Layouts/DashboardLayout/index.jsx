@@ -1,14 +1,11 @@
-import { Fragment, memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { signOut } from "firebase/auth";
-import { firebaseAuth, getAuthenticatedUser } from "@/configs/firebase";
-import Loading from "@/components/Common/Loading";
-import RequestNotification from "@/components/Common/RequestNotification";
 import classes from "./style.module.scss";
+import { LOCAL_STORAGE_KEYS } from "@/configs/constants";
 
 const DashboardLayout = () => {
-  const isMinimizeLocalKey = "isMinimizeLocalKey";
+  const isMinimizeLocalKey = LOCAL_STORAGE_KEYS.minimizedSidebar;
   const isMinimizeLocal = localStorage.getItem(isMinimizeLocalKey);
 
   const isMobile = useMediaQuery({ query: `(max-width: 992px)` });
@@ -19,7 +16,6 @@ const DashboardLayout = () => {
       { title: "Search", link: "/_/search", icon: <i className="bi bi-google"></i> },
       { title: "Calendar", link: "/_/calendar", icon: <i className="bi bi-calendar-week-fill" /> },
       { title: "Task Board", link: "/_/tasks", icon: <i className="bi bi-table" /> },
-      { title: "Note Book", link: "/_/notebook", icon: <i className="bi bi-card-text" /> },
       { title: "String Helper", link: "/_/str", icon: <i className="bi bi-alphabet-uppercase" /> },
       { title: "Keyboard Helper", link: "/_/keyboard", icon: <i className="bi bi-keyboard" /> },
       { title: "Regular Expression", link: "/_/regex", icon: <i className="bi bi-regex" /> },
@@ -29,20 +25,11 @@ const DashboardLayout = () => {
   );
 
   const [isMinimize, setIsMinimize] = useState(Boolean(isMobile || isMinimizeLocal));
-  const [isLoading, setIsLoading] = useState(false);
-  const [isTransparentLoading, setIsTransparentLoading] = useState(false);
 
   const handleToggleMinimize = () => {
     setIsMinimize(!isMinimize);
     if (isMinimize) localStorage.removeItem(isMinimizeLocalKey);
     else localStorage.setItem(isMinimizeLocalKey, 1);
-  };
-
-  const handleLogout = async () => {
-    setIsTransparentLoading(false);
-    setIsLoading(true);
-    await signOut(firebaseAuth);
-    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -58,62 +45,43 @@ const DashboardLayout = () => {
     }
   }, [location]);
 
-  useEffect(() => {
-    const middleware = async () => {
-      setIsLoading(true);
-      const user = await getAuthenticatedUser();
-      if (!user) window.location.replace("/");
-      else setIsLoading(false);
-    };
-
-    middleware();
-  }, []);
-
   return (
-    <Fragment>
-      <RequestNotification />
-      <div className={classes.dashboardLayout}>
-        <div className={`${classes.sidebar} ${isMinimize ? classes.minimize : ""}`}>
-          <div className={classes.logo}>
-            <img src="/icon-512x512.png" alt="logo" />
-            <h3>Nominote</h3>
-          </div>
-          <div className={classes.nav}>
-            {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.link}
-                title={isMinimize ? item.title : ""}
-                className={`${item.link === location.pathname ? classes.active : ""}`}
-              >
-                {item.icon}
-                <span>{item.title}</span>
-              </Link>
-            ))}
-            <a href="#" title={isMinimize ? "Logout" : ""} onClick={handleLogout}>
-              <i className="bi bi-box-arrow-left"></i>
-              <span>Logout</span>
-            </a>
-          </div>
-          <div className={classes.menu}>
-            {isMobile ? (
-              <i className="bi bi-emoji-smile"></i>
-            ) : (
-              <button className="btn btn-light" onClick={handleToggleMinimize}>
-                {isMinimize ? <i className="bi bi-caret-right-fill"></i> : <i className="bi bi-caret-left-fill"></i>}
-              </button>
-            )}
-          </div>
+    <div className={classes.dashboardLayout}>
+      <div className={`${classes.sidebar} ${isMinimize ? classes.minimize : ""}`}>
+        <div className={classes.logo}>
+          <img src="/icon-512x512.png" alt="logo" />
+          <h3>Nominote</h3>
         </div>
-        <div className={classes.outlet}>
-          <div className={classes.outletInside}>
-            <Outlet />
-          </div>
-          <div className={classes.copyright}>Copyright ©️ 2024 - {new Date().getFullYear()} | ngmthaq</div>
+        <div className={classes.nav}>
+          {menuItems.map((item, index) => (
+            <Link
+              key={index}
+              to={item.link}
+              title={isMinimize ? item.title : ""}
+              className={`${item.link === location.pathname ? classes.active : ""}`}
+            >
+              {item.icon}
+              <span>{item.title}</span>
+            </Link>
+          ))}
+        </div>
+        <div className={classes.menu}>
+          {isMobile ? (
+            <i className="bi bi-emoji-smile"></i>
+          ) : (
+            <button className="btn btn-light" onClick={handleToggleMinimize}>
+              {isMinimize ? <i className="bi bi-caret-right-fill"></i> : <i className="bi bi-caret-left-fill"></i>}
+            </button>
+          )}
         </div>
       </div>
-      <Loading open={isLoading} isTransparent={isTransparentLoading} />
-    </Fragment>
+      <div className={classes.outlet}>
+        <div className={classes.outletInside}>
+          <Outlet />
+        </div>
+        <div className={classes.copyright}>Copyright ©️ 2024 - {new Date().getFullYear()} | ngmthaq</div>
+      </div>
+    </div>
   );
 };
 

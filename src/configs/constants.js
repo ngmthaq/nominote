@@ -14,3 +14,8 @@ export const TASK_PRIORITY = {
   high: { value: 3, color: "orange" },
   critical: { value: 4, color: "red" },
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  todoList: "nominote:todoList",
+  minimizedSidebar: "nominote:minimizedSidebar",
+};

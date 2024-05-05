@@ -1,10 +1,11 @@
-import { memo, useState } from "react";
+import { memo, useRef, useState } from "react";
 import PageHeading from "@/components/Common/PageHeading";
 import CharacterClasses from "./components/CharacterClasses";
 import classes from "./style.module.scss";
 import "./style.scss";
 
 const RegexPage = () => {
+  const ref = useRef();
   const [regexString, setRegexString] = useState("[a-zA-Z0-9\\s]+");
   const [regexFlag, setRegexFlag] = useState("g");
   const [testString, setTestString] = useState("My Test String 12345");
@@ -42,10 +43,25 @@ const RegexPage = () => {
     }
   };
 
+  const copy = () => {
+    if (
+      window.location.protocol === "https" ||
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      const copyText = ref.current;
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(copyText.value);
+      alert("Copy to clipboard successfully");
+    } else {
+      alert("Cannot copy text to clipboard");
+    }
+  };
+
   const regex = getRegex();
   const found = testString.match(regex);
-
-  console.log(found);
+  console.log("Regex match:", found);
 
   return (
     <div className={classes.regexPage}>
@@ -58,17 +74,19 @@ const RegexPage = () => {
                 Regular Expression
               </label>
               <div className="input-group mb-3">
+                <span className="input-group-text">REGEX</span>
                 <input
                   type="text"
-                  className="form-control w-75"
+                  className="form-control"
                   id="regex"
                   placeholder="Insert your regex here"
                   value={regexString}
                   onChange={(event) => setRegexString(event.target.value)}
                 />
+                <span className="input-group-text">FLAG ( g, m, i, x, s, u, U, A, J, D )</span>
                 <input
                   type="text"
-                  className="form-control w-25"
+                  className="form-control"
                   id="modifier"
                   placeholder="Insert your regex flag here"
                   value={regexFlag}
@@ -76,15 +94,21 @@ const RegexPage = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label">Regex</label>
-                <input
-                  disabled
-                  type="text"
-                  className="form-control w-100"
-                  placeholder="REGEX"
-                  value={regex.toString()}
-                  onChange={(event) => setRegexFlag(event.target.value)}
-                />
+                <label className="form-label">Full Regular Expression</label>
+                <div className="input-group">
+                  <input
+                    disabled
+                    type="text"
+                    className="form-control"
+                    placeholder="REGEX"
+                    value={regex.toString()}
+                    onChange={(event) => setRegexFlag(event.target.value)}
+                    ref={ref}
+                  />
+                  <button className="btn btn-sm btn-success" onClick={copy}>
+                    Copy
+                  </button>
+                </div>
               </div>
             </div>
           </div>
