@@ -42,10 +42,7 @@
       height: calc(100vh - 90px - 48px);
       overflow-y: scroll;
       border-bottom: 1px dashed rgba(145, 158, 171, 0.4);
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
+      scrollbar-width: thin;
 
       & .divider {
         border-bottom: 1px dashed rgba(145, 158, 171, 0.4);
@@ -94,6 +91,10 @@
       width: 80px;
 
       & .logo h3 {
+        display: none;
+      }
+
+      & .nav .divider {
         display: none;
       }
 

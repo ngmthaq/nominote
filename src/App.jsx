@@ -12,6 +12,8 @@ import SeoPage from "./pages/SeoPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RandomTextPage from "./pages/RandomTextPage";
 import WordCountPage from "./pages/WordCountPage";
+import UTCDateTimePage from "./pages/UTCDateTimePage";
+import Milliseconds2DatePage from "./pages/Milliseconds2DatePage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -20,8 +22,10 @@ const App = () => {
         <Route path="/" element={<Navigate to={"/_/search"} replace />} />
         <Route path="_" element={<DashboardLayout />}>
           <Route path="search" element={<GoogleSearchPage />} />
-          <Route path="calendar" element={<CalendarPage />} />
           <Route path="tasks" element={<TaskBoardPage />} />
+          <Route path="date/calendar" element={<CalendarPage />} />
+          <Route path="date/utc" element={<UTCDateTimePage />} />
+          <Route path="date/milliseconds2date" element={<Milliseconds2DatePage />} />
           <Route path="text/converter" element={<TextConverterPage />} />
           <Route path="text/random" element={<RandomTextPage />} />
           <Route path="text/count" element={<WordCountPage />} />

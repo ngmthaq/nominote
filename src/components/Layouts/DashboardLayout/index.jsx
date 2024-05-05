@@ -15,8 +15,11 @@ const DashboardLayout = () => {
     () => [
       { title: "Common Helpers", link: "@divider" },
       { title: "Search", link: "/_/search", icon: <i className="bi bi-google"></i> },
-      { title: "Calendar", link: "/_/calendar", icon: <i className="bi bi-calendar-week-fill" /> },
       { title: "Task Board", link: "/_/tasks", icon: <i className="bi bi-table" /> },
+      { title: "Date & Time Helpers", link: "@divider" },
+      { title: "Calendar", link: "/_/date/calendar", icon: <i className="bi bi-calendar-week-fill" /> },
+      { title: "UTC Date & Unix Timestamp", link: "/_/date/utc", icon: <i className="bi bi-clock" /> },
+      { title: "Milliseconds to Date", link: "/_/date/milliseconds2date", icon: <i className="bi bi-clock-fill" /> },
       { title: "Text Helpers", link: "@divider" },
       { title: "Text Converter", link: "/_/text/converter", icon: <i className="bi bi-type" /> },
       { title: "Random Text", link: "/_/text/random", icon: <i className="bi bi-alphabet-uppercase" /> },
@@ -31,11 +34,22 @@ const DashboardLayout = () => {
   );
 
   const [isMinimize, setIsMinimize] = useState(Boolean(isMobile || isMinimizeLocal));
+  const [filterNavItems, setFilterNavItems] = useState(menuItems);
 
   const handleToggleMinimize = () => {
     setIsMinimize(!isMinimize);
     if (isMinimize) localStorage.removeItem(isMinimizeLocalKey);
     else localStorage.setItem(isMinimizeLocalKey, 1);
+  };
+
+  const handleSearch = (event) => {
+    setFilterNavItems(
+      menuItems.filter((item) => {
+        if (item.link === "@divider") return true;
+        console.log();
+        return item.title.toUpperCase().includes(event.target.value.toUpperCase());
+      }),
+    );
   };
 
   useEffect(() => {
@@ -59,7 +73,10 @@ const DashboardLayout = () => {
           <h3>Nominote</h3>
         </div>
         <div className={classes.nav}>
-          {menuItems.map((item, index) =>
+          <div className="mt-4 px-3">
+            <input type="email" className="form-control" placeholder="Search Tool" onChange={handleSearch} />
+          </div>
+          {filterNavItems.map((item, index) =>
             item.link === "@divider" ? (
               <div key={index} className={classes.divider}>
                 <small>{item.title}</small>
