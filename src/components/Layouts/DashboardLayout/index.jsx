@@ -29,6 +29,7 @@ const DashboardLayout = () => {
       { title: "Keyboard Event", link: "/_/keyboard/event", icon: <i className="bi bi-keyboard" /> },
       { title: "HTML/CSS/JS Helpers", link: "@divider" },
       { title: "SEO Meta Generator", link: "/_/html/seo", icon: <i className="bi bi-search-heart" /> },
+      { title: "TailwindCSS", link: "/_/css/tailwindcss", icon: <i className="bi bi-search-heart" /> },
       { title: "Javascript RegEx", link: "/_/js/regex", icon: <i className="bi bi-regex" /> },
     ],
     [],
