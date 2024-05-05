@@ -16,6 +16,7 @@
     "postdeploy": "rm -rf dist"
   },
   "dependencies": {
+    "@uiw/react-markdown-preview": "^5.1.1",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "firebase": "^10.9.0",

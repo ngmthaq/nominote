@@ -32,6 +32,8 @@ const DashboardLayout = () => {
       { title: "Tailwind Cheatsheet", link: "/_/css/tailwind", icon: <i className="bi bi-filetype-css" /> },
       { title: "Bootstrap Cheatsheet", link: "/_/css/bootstrap", icon: <i className="bi bi-bootstrap" /> },
       { title: "Javascript RegEx", link: "/_/js/regex", icon: <i className="bi bi-regex" /> },
+      { title: "Preview File", link: "@divider" },
+      { title: "Markdown Viewer", link: "/_/preview/md", icon: <i className="bi bi-markdown" /> },
     ],
     [],
   );
