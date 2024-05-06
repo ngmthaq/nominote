@@ -18,6 +18,7 @@ import LoremIpsumPage from "./pages/LoremIpsumPage";
 import TailwindCssCheatseetPage from "./pages/TailwindCssCheatseetPage";
 import BootstrapCheatseetPage from "./pages/BootstrapCheatseetPage";
 import MarkdownViewerPage from "./pages/MarkdownViewerPage";
+import JsonViewerPage from "./pages/JsonViewerPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="css/bootstrap" element={<BootstrapCheatseetPage />} />
           <Route path="js/regex" element={<RegexPage />} />
           <Route path="preview/md" element={<MarkdownViewerPage />} />
+          <Route path="preview/json" element={<JsonViewerPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Fragment>,
