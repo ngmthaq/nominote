@@ -21,6 +21,12 @@ const UTCDateTimePage = () => {
       <div className={classes.container}>
         <div className="mb-3">
           <label htmlFor="datetime" className="form-label">
+            Current Date & Time
+          </label>
+          <input type="text" className="form-control" id="datetime" value={date.toString()} disabled />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="datetime" className="form-label">
             UTC Date & Time
           </label>
           <input type="text" className="form-control" id="datetime" value={date.toUTCString()} disabled />

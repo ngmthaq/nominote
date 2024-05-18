@@ -27,6 +27,7 @@ const DashboardLayout = () => {
       { title: "Lorem Ipsum", link: "/_/text/loremipsum", icon: <i className="bi bi-body-text" /> },
       { title: "Keyboard Helpers", link: "@divider" },
       { title: "Keyboard Event", link: "/_/keyboard/event", icon: <i className="bi bi-keyboard" /> },
+      { title: "Keyboard Test", link: "/_/keyboard/test", icon: <i className="bi bi-grip-horizontal" /> },
       { title: "HTML/CSS/JS Helpers", link: "@divider" },
       { title: "SEO Meta Generator", link: "/_/html/seo", icon: <i className="bi bi-search-heart" /> },
       { title: "Tailwind Cheatsheet", link: "/_/css/tailwind", icon: <i className="bi bi-filetype-css" /> },

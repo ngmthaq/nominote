@@ -19,6 +19,7 @@ import TailwindCssCheatseetPage from "./pages/TailwindCssCheatseetPage";
 import BootstrapCheatseetPage from "./pages/BootstrapCheatseetPage";
 import MarkdownViewerPage from "./pages/MarkdownViewerPage";
 import JsonViewerPage from "./pages/JsonViewerPage";
+import KeyboardTestPage from "./pages/KeyboardTestPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="text/count" element={<WordCountPage />} />
           <Route path="text/loremipsum" element={<LoremIpsumPage />} />
           <Route path="keyboard/event" element={<KeyboardEventPage />} />
+          <Route path="keyboard/test" element={<KeyboardTestPage />} />
           <Route path="html/seo" element={<SeoPage />} />
           <Route path="css/tailwind" element={<TailwindCssCheatseetPage />} />
           <Route path="css/bootstrap" element={<BootstrapCheatseetPage />} />

@@ -6,13 +6,15 @@ const KeyboardEventPage = () => {
   const [event, setEvent] = useState(null);
 
   const handleKeyboardEvent = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     console.log(event);
     setEvent(event);
   };
 
   useEffect(() => {
-    document.addEventListener("keyup", handleKeyboardEvent);
-    return () => document.removeEventListener("keyup", handleKeyboardEvent);
+    document.addEventListener("keydown", handleKeyboardEvent);
+    return () => document.removeEventListener("keydown", handleKeyboardEvent);
   });
 
   return (
