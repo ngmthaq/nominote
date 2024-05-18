@@ -20,6 +20,7 @@ import BootstrapCheatseetPage from "./pages/BootstrapCheatseetPage";
 import MarkdownViewerPage from "./pages/MarkdownViewerPage";
 import JsonViewerPage from "./pages/JsonViewerPage";
 import KeyboardTestPage from "./pages/KeyboardTestPage";
+import AudioTestPage from "./pages/AudioTestPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="js/regex" element={<RegexPage />} />
           <Route path="preview/md" element={<MarkdownViewerPage />} />
           <Route path="preview/json" element={<JsonViewerPage />} />
+          <Route path="audio/micro/test" element={<AudioTestPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Fragment>,
