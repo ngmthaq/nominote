@@ -23,7 +23,7 @@ const JsonViewerPage = () => {
                 id="input"
                 value={source}
                 onChange={(event) => setSource(event.target.value)}
-                placeholder="Enter your markdown content here"
+                placeholder="Enter your json content here"
               />
             </div>
           </div>

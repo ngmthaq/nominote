@@ -6,8 +6,6 @@ const WordCountPage = () => {
   const ref2 = useRef();
   const [input, setInput] = useState("");
 
-  console.log(input.split(" "));
-
   return (
     <div className={classes.stringHelperPage}>
       <PageHeading>Word Counter</PageHeading>

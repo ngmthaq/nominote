@@ -21,6 +21,7 @@ import MarkdownViewerPage from "./pages/MarkdownViewerPage";
 import JsonViewerPage from "./pages/JsonViewerPage";
 import KeyboardTestPage from "./pages/KeyboardTestPage";
 import AudioTestPage from "./pages/AudioTestPage";
+import DependenciesToNpm from "./pages/DependenciesToNpm";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="text/random" element={<RandomTextPage />} />
           <Route path="text/count" element={<WordCountPage />} />
           <Route path="text/loremipsum" element={<LoremIpsumPage />} />
+          <Route path="text/deps2npm" element={<DependenciesToNpm />} />
           <Route path="keyboard/event" element={<KeyboardEventPage />} />
           <Route path="keyboard/test" element={<KeyboardTestPage />} />
           <Route path="html/seo" element={<SeoPage />} />

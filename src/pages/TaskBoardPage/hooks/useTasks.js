@@ -12,7 +12,9 @@ export default function useTasks() {
     setIsFetching(false);
   }, []);
 
-  console.log("useTasks:", tasks);
+  useEffect(() => {
+    console.log("useTasks:", tasks);
+  }, [tasks]);
 
   return { isFetching, tasks };
 }

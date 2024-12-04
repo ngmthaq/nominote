@@ -25,6 +25,7 @@ const DashboardLayout = () => {
       { title: "Random Text", link: "/_/text/random", icon: <i className="bi bi-alphabet-uppercase" /> },
       { title: "Word Counter", link: "/_/text/count", icon: <i className="bi bi-123" /> },
       { title: "Lorem Ipsum", link: "/_/text/loremipsum", icon: <i className="bi bi-body-text" /> },
+      { title: "Dependencies To NPM", link: "/_/text/deps2npm", icon: <i className="bi bi-filetype-js" /> },
       { title: "Keyboard Helpers", link: "@divider" },
       { title: "Keyboard Event", link: "/_/keyboard/event", icon: <i className="bi bi-keyboard" /> },
       { title: "Keyboard Test", link: "/_/keyboard/test", icon: <i className="bi bi-grip-horizontal" /> },
@@ -55,7 +56,6 @@ const DashboardLayout = () => {
     setFilterNavItems(
       menuItems.filter((item) => {
         if (item.link === "@divider") return true;
-        console.log();
         return item.title.toUpperCase().includes(event.target.value.toUpperCase());
       }),
     );
